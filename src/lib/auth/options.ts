@@ -5,9 +5,14 @@ import { prisma } from "@/lib/prisma";
 
 const githubId = process.env.GITHUB_ID;
 const githubSecret = process.env.GITHUB_SECRET;
+const nextAuthSecret = process.env.NEXTAUTH_SECRET;
 
 if (!githubId || !githubSecret) {
   console.warn("Missing GITHUB_ID or GITHUB_SECRET environment variables.");
+}
+
+if (!nextAuthSecret) {
+  console.warn("Missing NEXTAUTH_SECRET environment variable.");
 }
 
 export const authOptions: NextAuthOptions = {
@@ -29,6 +34,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: nextAuthSecret,
+  pages: {
+    signIn: "/api/auth/signin",
+    error: "/api/auth/error",
+  },
 };
 
