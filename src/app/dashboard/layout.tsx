@@ -5,10 +5,17 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
-  const session = await getServerSession(authOptions);
+  let session;
+  try {
+    session = await getServerSession(authOptions);
+  } catch (error) {
+    // If database connection fails, redirect to sign in
+    console.error("Failed to get session:", error);
+    redirect("/api/auth/signin?callbackUrl=%2Fdashboard%2Fsupport");
+  }
 
   if (!session) {
-    redirect("/api/auth/signin");
+    redirect("/api/auth/signin?callbackUrl=%2Fdashboard%2Fsupport");
   }
 
   return (

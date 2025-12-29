@@ -35,9 +35,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
   secret: nextAuthSecret,
-  pages: {
-    signIn: "/api/auth/signin",
-    error: "/api/auth/error",
-  },
+  debug: process.env.NODE_ENV === "development",
 };
 
