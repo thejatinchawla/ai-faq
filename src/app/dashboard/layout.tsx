@@ -31,12 +31,6 @@ export default async function DashboardLayout({ children }: { children: ReactNod
             </span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <Link
-              href="/dashboard/support"
-              className="rounded-md border border-slate-200 px-3 py-2 font-medium text-slate-800 transition hover:border-slate-300"
-            >
-              Support
-            </Link>
             <form action="/api/auth/signout" method="post">
               <button
                 type="submit"

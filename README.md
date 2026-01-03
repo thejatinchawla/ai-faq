@@ -5,7 +5,7 @@ Next.js 14 (App Router) app with Tailwind, Prisma (SQLite), NextAuth (GitHub), a
 ## Stack
 - Next.js 14 / App Router, React, TypeScript, Tailwind
 - Auth: NextAuth + PrismaAdapter (GitHub OAuth)
-- DB: SQLite via Prisma (`prisma/dev.db`)
+- DB: PostgreSQL via Prisma (Supabase recommended - see [SUPABASE_SETUP.md](./SUPABASE_SETUP.md))
 - AI: OpenAI chat completions with streaming
 
 ## Quick start (local)
@@ -22,8 +22,10 @@ GITHUB_ID=your_github_oauth_client_id
 GITHUB_SECRET=your_github_oauth_client_secret
 OPENAI_API_KEY=your_openai_key
 # optional: OPENAI_MODEL=gpt-4o-mini (default)
-DATABASE_URL="file:./prisma/dev.db"
+DATABASE_URL="postgresql://postgres:password@db.xxxxx.supabase.co:5432/postgres?sslmode=require"
 ```
+
+**Database Setup:** See [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) for detailed Supabase setup instructions.
 
 3) GitHub OAuth app settings:
 - Homepage URL: `http://localhost:3000`
@@ -57,7 +59,13 @@ npm run dev
 ## Streaming UX
 - Client reads streamed text from `/api/chat` and appends tokens live to the assistant bubble. Feedback buttons call `/api/feedback`.
 
-## Deploy notes
+## Deployment
+
+📖 **See [DEPLOYMENT.md](./DEPLOYMENT.md) for a complete deployment guide.**
+
+**Database Setup:** 📘 **See [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) for Supabase setup instructions.**
+
+Quick notes:
 - Set `NEXTAUTH_URL` to your deployed domain.
 - Update GitHub OAuth callback to `https://your-domain/api/auth/callback/github`.
-- Migrate your target DB (SQLite here; swap to Postgres by changing `DATABASE_URL` and provider).
+- **Important:** Use PostgreSQL for production (Supabase recommended - free tier available).
