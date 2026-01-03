@@ -5,6 +5,8 @@ import { authOptions } from "@/lib/auth/options";
 import { prisma } from "@/lib/prisma";
 import { StartNewChatButton } from "@/components/chat/StartNewChatButton";
 
+export const dynamic = "force-dynamic";
+
 type SearchParams = {
   new?: string;
 };
